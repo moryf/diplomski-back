@@ -1,20 +1,28 @@
 package com.konstil.Ponude.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "proizvodi_ponuda")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class ProizvodPonuda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @PrimaryKeyJoinColumn(name = "ponuda_id", referencedColumnName = "id")
+    @JoinColumn(name = "ponuda_id",nullable = false)
     private Ponuda ponuda;
 
     @ManyToOne
-    @JoinColumn(name = "tip_proizvoda_ponuda_id")
+    @JoinColumn(name = "tip_proizvoda_ponuda_id",nullable = false)
     private TipProizvodaPonuda tipProizvodaPonuda;
 
     private String naziv;
