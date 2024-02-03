@@ -1,5 +1,6 @@
-package com.konstil.Ponude.domain;
+package com.konstil.Ponude.domain.kalkulacija;
 
+import com.konstil.Ponude.domain.ponuda.Proizvod;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,9 +25,14 @@ public class StavkaKalkulacije {
     @ManyToOne
     @JoinColumn(name="sifra_proizvoda",nullable = false)
     private Proizvod proizvod;
+    @Column(nullable = false)
     private float kolicina;
+    @Column(nullable = false)
     private boolean cinkovanje;
+    @Column(nullable = false)
     private boolean farbanje;
+    @Column(nullable = false)
     private boolean montaza;
+    @Column(nullable = false)
     private boolean izrada;
 }

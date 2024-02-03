@@ -1,4 +1,4 @@
-package com.konstil.Ponude.domain;
+package com.konstil.Ponude.domain.ponuda;
 
 
 import jakarta.persistence.*;
@@ -17,5 +17,6 @@ public class TipProizvodaPonuda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String naziv;
 }

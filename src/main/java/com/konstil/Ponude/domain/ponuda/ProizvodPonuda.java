@@ -1,4 +1,4 @@
-package com.konstil.Ponude.domain;
+package com.konstil.Ponude.domain.ponuda;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,11 +24,16 @@ public class ProizvodPonuda {
     @ManyToOne
     @JoinColumn(name = "tip_proizvoda_ponuda_id",nullable = false)
     private TipProizvodaPonuda tipProizvodaPonuda;
-
+    @Column(nullable = false)
     private String naziv;
+    @Column(nullable = false)
     private float ukupnoMetara;
+    @Column(nullable = false)
     private float ukupnoKomada;
+    @Column(nullable = false)
     private float duzinaPoKomadu;
+    @Column(nullable = false)
     private float visinaPoKomadu;
+    @Column(nullable = false)
     private float dubinaPoKomadu;
 }

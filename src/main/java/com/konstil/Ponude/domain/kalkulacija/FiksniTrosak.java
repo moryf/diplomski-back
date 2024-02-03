@@ -1,4 +1,4 @@
-package com.konstil.Ponude.domain;
+package com.konstil.Ponude.domain.kalkulacija;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,6 +20,8 @@ public class FiksniTrosak {
     @ManyToOne
     @JoinColumn(name="kalukulacija_id",nullable = false)
     private Kalkulacija kalkulacija;
+    @Column(nullable = false)
     private float cena;
+    @Column(nullable = false)
     private String opis;
 }

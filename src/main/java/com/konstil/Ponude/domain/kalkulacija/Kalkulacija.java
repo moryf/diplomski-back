@@ -1,5 +1,6 @@
-package com.konstil.Ponude.domain;
+package com.konstil.Ponude.domain.kalkulacija;
 
+import com.konstil.Ponude.domain.ponuda.ProizvodPonuda;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,17 +21,28 @@ public class Kalkulacija {
     @ManyToOne
     @JoinColumn(name="proizvod_ponuda_id",nullable = false)
     private ProizvodPonuda proizvodPonuda;
-
-    private boolean cinkovanje;
-    private boolean farbanje;
-    private boolean montaza;
-    private boolean izrada;
+    @Column(nullable = false)
+    private boolean cinkovanje = false;
+    @Column(nullable = false)
+    private boolean farbanje = false;
+    @Column(nullable = false)
+    private boolean montaza = false;
+    @Column(nullable = false)
+    private boolean izrada = false;
+    @Column(nullable = false)
     private float materijalPoKg;
+    @Column(nullable = false)
     private float cinkovanjePoKg;
+    @Column(nullable = false)
     private float farbanjePoM2;
+    @Column(nullable = false)
     private float montazaPoKg;
+    @Column(nullable = false)
     private float izradaPoKg;
+    @Column(nullable = false)
     private float rezijskiTroskoviStepen;
+    @Column(nullable = false)
     private float stepenSigurnosti;
+    @Column(nullable = false)
     private String koriscenjeCene;
 }

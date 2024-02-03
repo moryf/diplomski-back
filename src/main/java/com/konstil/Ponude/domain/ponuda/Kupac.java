@@ -1,4 +1,4 @@
-package com.konstil.Ponude.domain;
+package com.konstil.Ponude.domain.ponuda;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,6 +16,7 @@ public class Kupac {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String imeIPrezime;
     private String adresa;
     @Column(nullable = false, unique = true)
