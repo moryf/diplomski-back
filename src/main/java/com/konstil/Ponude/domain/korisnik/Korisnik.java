@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Collection;
+import java.util.List;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,7 +26,11 @@ public class Korisnik {
     String korisnickoIme;
     @Column(nullable = false)
     String lozinka;
-    @ManyToOne
-    @JoinColumn(name = "uloga",nullable = false)
-    Uloga uloga;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "korisnik_uloga",
+            joinColumns = @JoinColumn(name = "korisnik_id"),
+            inverseJoinColumns = @JoinColumn(name = "uloga_naziv")
+    )
+    Collection<Uloga> uloge;
 }

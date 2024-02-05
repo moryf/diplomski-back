@@ -1,19 +1,15 @@
 package com.konstil.Ponude.service;
 
-import com.konstil.Ponude.repository.OpstiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class OpstiService <T, ID> {
-
-    @Autowired
-    OpstiRepository<T, ID> repository;
-
-
+    protected JpaRepository<T, ID> repository;
     public T save(T t) {
         return repository.save(t);
     }

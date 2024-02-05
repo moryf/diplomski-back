@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface KalkulacijaRepository extends JpaRepository<Kalkulacija, Long>{
+public interface KalkulacijaRepository extends JpaRepository<Kalkulacija, Long> {
 }
