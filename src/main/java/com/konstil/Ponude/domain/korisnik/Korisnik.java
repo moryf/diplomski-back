@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -32,5 +30,5 @@ public class Korisnik {
             joinColumns = @JoinColumn(name = "korisnik_id"),
             inverseJoinColumns = @JoinColumn(name = "uloga_naziv")
     )
-    Collection<Uloga> uloge;
+    List<Uloga> uloge;
 }

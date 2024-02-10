@@ -15,4 +15,11 @@ import lombok.Setter;
 public class Uloga {
     @Id
     String naziv;
+
+    @Override
+    public String toString() {
+        return "Uloga{" +
+                "naziv='" + naziv + '\'' +
+                '}';
+    }
 }

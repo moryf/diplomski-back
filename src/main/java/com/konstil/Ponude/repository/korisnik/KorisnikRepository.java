@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface KorisnikRepository extends JpaRepository<Korisnik, Long> {
 
-    public Optional<Korisnik> findByUsername(String username);
+    public Optional<Korisnik> findByKorisnickoIme(String username);
 }

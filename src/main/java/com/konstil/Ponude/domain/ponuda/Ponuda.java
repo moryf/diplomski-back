@@ -28,6 +28,8 @@ public class Ponuda {
     @Column(nullable = false, name = "datum_otvaranja")
     @ColumnDefault("CURRENT_TIMESTAMP")
     private Date datumOtvaranja;
+    @Column(nullable = false, name = "rok_ponude")
+    private Date rokPonude;
     @Column(nullable = false)
     private String status;
     private String opis;
