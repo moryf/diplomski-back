@@ -19,7 +19,6 @@ public class Kupac {
     @Column(nullable = false)
     private String imeIPrezime;
     private String adresa;
-    @Column(nullable = false, unique = true)
     private String brojTelefona;
     private String email;
 }

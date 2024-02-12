@@ -25,7 +25,7 @@ public class Ponuda {
     @ManyToOne
     @JoinColumn(name = "kupac_id", nullable = false)
     private Kupac kupac;
-    @Column(nullable = false, name = "datum_otvaranja")
+    @Column(name = "datum_otvaranja")
     @ColumnDefault("CURRENT_TIMESTAMP")
     private Date datumOtvaranja;
     @Column(nullable = false, name = "rok_ponude")

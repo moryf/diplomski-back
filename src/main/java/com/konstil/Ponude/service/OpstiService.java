@@ -33,4 +33,5 @@ public class OpstiService <T, ID> {
     public List<T> findAll() {
         return repository.findAll();
     }
+
 }
