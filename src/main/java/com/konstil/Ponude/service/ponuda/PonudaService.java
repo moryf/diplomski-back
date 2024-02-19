@@ -20,6 +20,7 @@ public class PonudaService extends OpstiService<Ponuda,Long> {
 
     public Ponuda novaPonuda(Ponuda ponuda) throws Exception {
         try {
+            ponuda.setNaziv("P-" + repository.count() + "-" + java.time.LocalDate.now().getYear());
             ponuda.setKupac(kupacRepository.save(ponuda.getKupac()));
             return repository.save(ponuda);
         }

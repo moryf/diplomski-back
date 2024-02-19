@@ -1,6 +1,7 @@
 package com.konstil.Ponude.domain.ponuda;
 
 
+import com.konstil.Ponude.controllers.ponuda.PonudaController;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,6 +32,7 @@ public class Ponuda {
     @Column(nullable = false, name = "rok_ponude")
     private Date rokPonude;
     @Column(nullable = false)
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private PonudaStatus status;
     private String opis;
 }

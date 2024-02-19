@@ -44,5 +44,6 @@ public class Kalkulacija {
     @Column(nullable = false)
     private float stepenSigurnosti;
     @Column(nullable = false)
-    private String koriscenjeCene;
+    @Enumerated(EnumType.STRING)
+    private KoriscenjeCene koriscenjeCene = KoriscenjeCene.VELEPRODAJNA_CENA;
 }
