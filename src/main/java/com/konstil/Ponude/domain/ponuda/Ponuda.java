@@ -2,6 +2,7 @@ package com.konstil.Ponude.domain.ponuda;
 
 
 import com.konstil.Ponude.controllers.ponuda.PonudaController;
+import com.konstil.Ponude.domain.korisnik.Korisnik;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,4 +36,7 @@ public class Ponuda {
     @Enumerated(EnumType.STRING)
     private PonudaStatus status;
     private String opis;
+
+    @ManyToOne
+    Korisnik otvorioPonudu;
 }

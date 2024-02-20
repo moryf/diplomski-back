@@ -35,4 +35,6 @@ public class StavkaKalkulacije {
     private boolean montaza;
     @Column(nullable = false)
     private boolean izrada;
+    @Column(nullable = false)
+    private float cena;
 }
