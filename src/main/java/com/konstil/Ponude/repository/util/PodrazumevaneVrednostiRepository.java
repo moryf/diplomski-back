@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PodrazumevaneVrednostiRepository extends JpaRepository<PodrazumevaneVrednosti, String> {
+
+    public PodrazumevaneVrednosti findByOznaka(String oznaka);
 }

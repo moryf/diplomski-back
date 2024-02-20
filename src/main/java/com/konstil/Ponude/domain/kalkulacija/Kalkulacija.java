@@ -1,11 +1,15 @@
 package com.konstil.Ponude.domain.kalkulacija;
 
+import com.konstil.Ponude.domain.korisnik.Korisnik;
 import com.konstil.Ponude.domain.ponuda.ProizvodPonuda;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "kalkulacije")
@@ -18,9 +22,19 @@ public class Kalkulacija {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    String naziv;
+
     @ManyToOne
     @JoinColumn(name="proizvod_ponuda_id",nullable = false)
     private ProizvodPonuda proizvodPonuda;
+
+    Date datumOtvaranja = new Date();
+    Date poslednjiDatumIzmene = new Date();
+
+    @ManyToOne
+    Korisnik kreirao;
+
+
     @Column(nullable = false)
     private boolean cinkovanje = false;
     @Column(nullable = false)
