@@ -33,4 +33,11 @@ public class KorisnikService extends OpstiService<Korisnik,Long> {
         return save(korisnik);
     }
 
+    public Korisnik izmeni(String id, String ime, String prezime, String korisnickoIme) {
+        Korisnik korisnik = findById(Long.parseLong(id));
+        korisnik.setIme(ime);
+        korisnik.setPrezime(prezime);
+        korisnik.setKorisnickoIme(korisnickoIme);
+        return save(korisnik);
+    }
 }

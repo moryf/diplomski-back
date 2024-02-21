@@ -4,7 +4,9 @@ import com.konstil.Ponude.domain.util.PodrazumevaneVrednosti;
 import com.konstil.Ponude.repository.util.PodrazumevaneVrednostiRepository;
 import com.konstil.Ponude.service.OpstiService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PodrazumevaneVrednostiService extends OpstiService<PodrazumevaneVrednosti,String> {
 
     @Autowired

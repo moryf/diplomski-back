@@ -43,6 +43,8 @@ public class Kalkulacija {
     private boolean montaza = false;
     @Column(nullable = false)
     private boolean izrada = false;
+
+
     @Column(nullable = false)
     private float materijalPoKg;
     @Column(nullable = false)

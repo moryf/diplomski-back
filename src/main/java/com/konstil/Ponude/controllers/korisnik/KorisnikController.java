@@ -31,4 +31,15 @@ public class KorisnikController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @PutMapping("/izmeni/{id}/ime={ime}/prezime={prezime}/korisnickoIme={korisnickoIme}")
+    public ResponseEntity<?> izmeni(@PathVariable String id, @PathVariable String ime, @PathVariable String prezime, @PathVariable String korisnickoIme) {
+        try {
+            return ResponseEntity.ok(korisnikService.izmeni(id, ime, prezime, korisnickoIme));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+
 }
