@@ -29,9 +29,9 @@ public class PonudaController {
         return ResponseEntity.ok(ponudaService.findAll());
     }
 
-    @GetMapping("/nove")
+    @GetMapping("/nezavrsene")
     public ResponseEntity<?> novePonude() {
-        return ResponseEntity.ok(ponudaService.findByStatus(PonudaStatus.NOVA));
+        return ResponseEntity.ok(ponudaService.findNezavrsene());
     }
 
     @GetMapping("/prihvacene")
@@ -67,6 +67,11 @@ public class PonudaController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+    @GetMapping("/dashboard")
+    public ResponseEntity<?> dashboard() {
+        return ResponseEntity.ok(ponudaService.dashboard());
     }
 
 

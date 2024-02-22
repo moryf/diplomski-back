@@ -13,4 +13,10 @@ public class PodrazumevaneVrednostiService extends OpstiService<PodrazumevaneVre
     public PodrazumevaneVrednostiService(PodrazumevaneVrednostiRepository podrazumevaneVrednostiRepository) {
         this.repository = podrazumevaneVrednostiRepository;
     }
+
+    public PodrazumevaneVrednosti update(String oznaka, float vrednost) {
+        PodrazumevaneVrednosti podrazumevaneVrednosti = findById(oznaka);
+        podrazumevaneVrednosti.setVrednost(vrednost);
+        return save(podrazumevaneVrednosti);
+    }
 }

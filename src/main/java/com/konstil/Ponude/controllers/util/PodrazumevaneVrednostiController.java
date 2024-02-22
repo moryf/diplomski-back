@@ -17,5 +17,14 @@ public class PodrazumevaneVrednostiController {
         return ResponseEntity.ok(podrazumevaneVrednostiService.findAll());
     }
 
+    @PutMapping("/izmeni/oznaka={oznaka}/vrednost={vrednost}")
+    public ResponseEntity<?> updatePodrazumevanaVrednost(@PathVariable String oznaka, @PathVariable float vrednost) {
+        try {
+            return ResponseEntity.ok(podrazumevaneVrednostiService.update(oznaka, vrednost));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 
 }

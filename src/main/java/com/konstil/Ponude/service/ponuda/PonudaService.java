@@ -10,6 +10,7 @@ import com.konstil.Ponude.service.OpstiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -46,5 +47,29 @@ public class PonudaService extends OpstiService<Ponuda,Long> {
     public List<Ponuda> findByStatus(PonudaStatus ponudaStatus) {
         return ((PonudaRepository) repository).findByStatus(ponudaStatus);
 
+    }
+
+
+    public List<Ponuda> findNezavrsene(){
+        List<Ponuda> ponude = findByStatus(PonudaStatus.NOVA);
+        ponude.addAll(findByStatus(PonudaStatus.OBRADJENA));
+        return ponude;
+    }
+
+
+    public HashMap<String,String> dashboard() {
+        int nove = findByStatus(PonudaStatus.NOVA).size();
+        int obradjene = findByStatus(PonudaStatus.OBRADJENA).size();
+        int ponudeSaRokomOveNedelje = ((PonudaRepository) repository).ponudeSaRokomOveNedelje();
+        int ponudaSaIsteklimRokom = ((PonudaRepository) repository).ponudeSaIsteklimRokom();
+        int novihPonudaOveNedelje = ((PonudaRepository) repository).novihPonudaOveNedelje();
+
+        HashMap<String,String> map = new HashMap<>();
+        map.put("nove",String.valueOf(nove));
+        map.put("obradjene",String.valueOf(obradjene));
+        map.put("ponudeSaRokomOveNedelje",String.valueOf(ponudeSaRokomOveNedelje));
+        map.put("ponudaSaIsteklimRokom",String.valueOf(ponudaSaIsteklimRokom));
+        map.put("novihPonudaOveNedelje",String.valueOf(novihPonudaOveNedelje));
+        return map;
     }
 }

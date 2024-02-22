@@ -1,9 +1,11 @@
 package com.konstil.Ponude.service.kalkulacija;
 
 import com.konstil.Ponude.domain.kalkulacija.Kalkulacija;
+import com.konstil.Ponude.domain.ponuda.PonudaStatus;
 import com.konstil.Ponude.repository.kalkulacija.KalkulacijaRepository;
 import com.konstil.Ponude.repository.kalkulacija.SablonKalkulacijaRepository;
 import com.konstil.Ponude.repository.korisnik.KorisnikRepository;
+import com.konstil.Ponude.repository.ponuda.PonudaRepository;
 import com.konstil.Ponude.repository.ponuda.ProizvodPonudaRepository;
 import com.konstil.Ponude.repository.util.PodrazumevaneVrednostiRepository;
 import com.konstil.Ponude.service.OpstiService;
@@ -32,6 +34,9 @@ public class KalkulacijaService extends OpstiService<Kalkulacija,Long> {
     @Autowired
     SablonKalkulacijaRepository sablonKalkulacijaRepository;
 
+    @Autowired
+    PonudaRepository ponudaRepository;
+
     public List<Kalkulacija> getByProizvodPonudaId(Long id) {
         return ((KalkulacijaRepository) repository).findByProizvodPonudaId(id);
     }
@@ -53,6 +58,13 @@ public class KalkulacijaService extends OpstiService<Kalkulacija,Long> {
         kalkulacija.setStepenSigurnosti(podrazumevaneVrednostiRepository.findByOznaka("stepenSigurnosti").getVrednost());
         kalkulacija.setProizvodPonuda(proizvodPonudaRepository.findById(idProizvodaPonude).get());
         kalkulacija.setNaziv(kalkulacija.getProizvodPonuda().getNaziv()+ " "+kalkulacija.getKreirao().getIme());
+
+        if(kalkulacija.getProizvodPonuda().getPonuda().getStatus() == PonudaStatus.NOVA){
+            kalkulacija.getProizvodPonuda().getPonuda().setStatus(PonudaStatus.OBRADJENA);
+            ponudaRepository.save(kalkulacija.getProizvodPonuda().getPonuda());
+        }
+
+
         return save(kalkulacija);
     }
 
@@ -73,6 +85,12 @@ public class KalkulacijaService extends OpstiService<Kalkulacija,Long> {
         novaKalkulacije.setStepenSigurnosti(sablon.getStepenSigurnosti());
         novaKalkulacije.setProizvodPonuda(proizvodPonudaRepository.findById(idProizvodaPonude).get());
         novaKalkulacije.setNaziv(novaKalkulacije.getProizvodPonuda().getNaziv()+ " "+novaKalkulacije.getKreirao().getIme());
+
+        if(novaKalkulacije.getProizvodPonuda().getPonuda().getStatus() == PonudaStatus.NOVA){
+            novaKalkulacije.getProizvodPonuda().getPonuda().setStatus(PonudaStatus.OBRADJENA);
+            ponudaRepository.save(novaKalkulacije.getProizvodPonuda().getPonuda());
+        }
+
         return save(novaKalkulacije);
 
     }
