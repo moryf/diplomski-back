@@ -20,7 +20,8 @@ public class Proizvod {
     @Column(nullable = false)
     private String opis;
     @Column(nullable = false)
-    private String jedinicaMere;
+    @Enumerated(EnumType.STRING)
+    private JedinicaMere jedinicaMere;
     @Column(nullable = false)
     private float masa;
     @Column(nullable = false)
