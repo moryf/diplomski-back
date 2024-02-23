@@ -1,6 +1,7 @@
 package com.konstil.Ponude.service.kalkulacija;
 
 import com.konstil.Ponude.domain.kalkulacija.StavkaKalkulacije;
+import com.konstil.Ponude.repository.kalkulacija.KalkulacijaRepository;
 import com.konstil.Ponude.repository.kalkulacija.StavkaKalkulacijeRepository;
 import com.konstil.Ponude.service.OpstiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,21 +15,15 @@ public class StavkaKalkulacijeService extends OpstiService<StavkaKalkulacije,Lon
     public StavkaKalkulacijeService(StavkaKalkulacijeRepository stavkaKalkulacijeRepository) {
         this.repository = stavkaKalkulacijeRepository;
     }
+    @Autowired
+    KalkulacijaRepository kalkulacijaRepository;
 
     public List<StavkaKalkulacije> getStavkeKalkulacijeByKalkulacijaId(Long id) {
         return ((StavkaKalkulacijeRepository) repository).getAllByKalkulacijaId(id);
     }
 
-    public List<StavkaKalkulacije> updateStavkeKalkulacijeByKalkulacijaId(Long id, List<StavkaKalkulacije> stavkeKalkulacije) {
-        List<StavkaKalkulacije> stavkeKalkulacijeIzBaze = ((StavkaKalkulacijeRepository) repository).getAllByKalkulacijaId(id);
-        for (StavkaKalkulacije stavkaKalkulacije : stavkeKalkulacijeIzBaze) {
-            if (!stavkeKalkulacije.contains(stavkaKalkulacije)) {
-                repository.delete(stavkaKalkulacije);
-            }
-        }
-        for (StavkaKalkulacije stavkaKalkulacije : stavkeKalkulacije) {
-            save(stavkaKalkulacije);
-        }
-        return ((StavkaKalkulacijeRepository) repository).getAllByKalkulacijaId(id);
+    public StavkaKalkulacije dodajStavkuKalkulacije(Long id, StavkaKalkulacije stavkaKalkulacije) {
+        stavkaKalkulacije.setKalkulacija(kalkulacijaRepository.findById(id).get());
+        return repository.save(stavkaKalkulacije);
     }
 }

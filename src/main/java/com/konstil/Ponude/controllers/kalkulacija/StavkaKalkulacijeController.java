@@ -22,10 +22,8 @@ public class StavkaKalkulacijeController {
         return ResponseEntity.ok(stavkaKalkulacijeService.getStavkeKalkulacijeByKalkulacijaId(id));
     }
 
-
-    @PutMapping("/kalkulacija/{id}")
-    public ResponseEntity<?> updateStavkeKalkulacijeByKalkulacijaId(@PathVariable Long id, @RequestBody List<StavkaKalkulacije> stavkeKalkulacije){
-        return ResponseEntity.ok(stavkaKalkulacijeService.updateStavkeKalkulacijeByKalkulacijaId(id, stavkeKalkulacije));
-
+    @PostMapping("/dodaj/kalkulacija/{id}")
+    public ResponseEntity<?> dodajStavkuKalkulacije(@PathVariable Long id, @RequestBody StavkaKalkulacije stavkaKalkulacije){
+        return ResponseEntity.ok(stavkaKalkulacijeService.dodajStavkuKalkulacije(id, stavkaKalkulacije));
     }
 }
