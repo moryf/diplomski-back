@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface PonudaRepository extends JpaRepository<Ponuda, Long> {
-    List<Ponuda> findByStatus(PonudaStatus ponudaStatus);
+    List<Ponuda> findByStatusOrderByDatumOtvaranjaDesc(PonudaStatus ponudaStatus);
 
     @Query(
         value = "SELECT COUNT(*) FROM ponude WHERE status = 'NOVA' AND rok_ponude < current_date + 7 AND rok_ponude > current_date",

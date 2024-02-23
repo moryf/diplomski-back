@@ -45,7 +45,7 @@ public class PonudaService extends OpstiService<Ponuda,Long> {
     }
 
     public List<Ponuda> findByStatus(PonudaStatus ponudaStatus) {
-        return ((PonudaRepository) repository).findByStatus(ponudaStatus);
+        return ((PonudaRepository) repository).findByStatusOrderByDatumOtvaranjaDesc(ponudaStatus);
 
     }
 
