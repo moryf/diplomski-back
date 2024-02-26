@@ -30,6 +30,7 @@ public class StavkaKalkulacije {
 
     @Enumerated(EnumType.STRING)
     NacinRacunanjaKomada nacinRacunanjaKomada;
+    float razmak;
     float multiplikator;
     int rucniDodatak;
     int kolicinaKomada;
