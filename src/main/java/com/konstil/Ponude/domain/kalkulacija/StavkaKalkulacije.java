@@ -1,5 +1,7 @@
 package com.konstil.Ponude.domain.kalkulacija;
 
+import com.konstil.Ponude.domain.kalkulacija.enumeracije.NacinRacunanjaDuzineKomada;
+import com.konstil.Ponude.domain.kalkulacija.enumeracije.NacinRacunanjaKomada;
 import com.konstil.Ponude.domain.ponuda.Proizvod;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,6 +27,18 @@ public class StavkaKalkulacije {
     @ManyToOne
     @JoinColumn(name="sifra_proizvoda",nullable = false)
     private Proizvod proizvod;
+
+    @Enumerated(EnumType.STRING)
+    NacinRacunanjaKomada nacinRacunanjaKomada;
+    float multiplikator;
+    float rucniDodatak;
+
+    @Enumerated(EnumType.STRING)
+    NacinRacunanjaDuzineKomada nacinRacunanjaDuzineKomada;
+    float duzina;
+    float razlikaDuzine;
+
+
     @Column(nullable = false)
     private float kolicina;
     @Column(nullable = false)

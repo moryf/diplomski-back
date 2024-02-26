@@ -1,5 +1,6 @@
 package com.konstil.Ponude.domain.kalkulacija;
 
+import com.konstil.Ponude.domain.kalkulacija.enumeracije.KoriscenjeCene;
 import com.konstil.Ponude.domain.korisnik.Korisnik;
 import com.konstil.Ponude.domain.ponuda.ProizvodPonuda;
 import jakarta.persistence.*;
@@ -7,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 
 import java.util.Date;
 
