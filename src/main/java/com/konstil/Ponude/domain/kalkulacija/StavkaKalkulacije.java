@@ -31,12 +31,14 @@ public class StavkaKalkulacije {
     @Enumerated(EnumType.STRING)
     NacinRacunanjaKomada nacinRacunanjaKomada;
     float multiplikator;
-    float rucniDodatak;
+    int rucniDodatak;
+    int kolicinaKomada;
 
     @Enumerated(EnumType.STRING)
     NacinRacunanjaDuzineKomada nacinRacunanjaDuzineKomada;
     float duzina;
     float razlikaDuzine;
+    float duzinaKomada;
 
 
     @Column(nullable = false)
