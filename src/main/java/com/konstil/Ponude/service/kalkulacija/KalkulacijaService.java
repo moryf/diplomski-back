@@ -82,6 +82,7 @@ public class KalkulacijaService extends OpstiService<Kalkulacija,Long> {
 
     public Kalkulacija novakalkulacijaIzSablona(Long idSablona, Long idProizvodaPonude) {
         Kalkulacija novaKalkulacije = new Kalkulacija();
+        System.out.println(idSablona+ " "+sablonKalkulacijaRepository.findById(idSablona).get().getKalkulacija().getId() );
         Kalkulacija sablon = findById(sablonKalkulacijaRepository.findById(idSablona).get().getKalkulacija().getId());
         novaKalkulacije.setKreirao(sablon.getKreirao());
         novaKalkulacije.setCinkovanje(sablon.isCinkovanje());
