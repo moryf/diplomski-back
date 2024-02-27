@@ -37,7 +37,7 @@ public class StavkaKalkulacije {
 
     @Enumerated(EnumType.STRING)
     NacinRacunanjaDuzineKomada nacinRacunanjaDuzineKomada;
-    float duzina;
+    float referentnaDuzina;
     float razlikaDuzine;
     float duzinaKomada;
 

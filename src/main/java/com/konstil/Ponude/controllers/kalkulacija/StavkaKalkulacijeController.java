@@ -26,4 +26,9 @@ public class StavkaKalkulacijeController {
     public ResponseEntity<?> dodajStavkuKalkulacije(@PathVariable Long id, @RequestBody StavkaKalkulacije stavkaKalkulacije){
         return ResponseEntity.ok(stavkaKalkulacijeService.dodajStavkuKalkulacije(id, stavkaKalkulacije));
     }
+
+    @PutMapping("/izmeni/lista")
+    public ResponseEntity<?> izmeniStavkeKalkulacije(@RequestBody List<StavkaKalkulacije> stavkeKalkulacije){
+        return ResponseEntity.ok(stavkaKalkulacijeService.izmeniStavkeKalkulacije(stavkeKalkulacije));
+    }
 }

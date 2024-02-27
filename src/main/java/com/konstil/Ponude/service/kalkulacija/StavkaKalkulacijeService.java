@@ -26,4 +26,8 @@ public class StavkaKalkulacijeService extends OpstiService<StavkaKalkulacije,Lon
         stavkaKalkulacije.setKalkulacija(kalkulacijaRepository.findById(id).get());
         return repository.save(stavkaKalkulacije);
     }
+
+    public List<StavkaKalkulacije> izmeniStavkeKalkulacije(List<StavkaKalkulacije> stavkeKalkulacije) {
+        return repository.saveAll(stavkeKalkulacije);
+    }
 }
