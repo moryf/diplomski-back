@@ -31,4 +31,17 @@ public class StavkaKalkulacijeController {
     public ResponseEntity<?> izmeniStavkeKalkulacije(@RequestBody List<StavkaKalkulacije> stavkeKalkulacije){
         return ResponseEntity.ok(stavkaKalkulacijeService.izmeniStavkeKalkulacije(stavkeKalkulacije));
     }
+
+    @PutMapping("/izmeni")
+    public ResponseEntity<?> izmeniStavkuKalkulacije(@RequestBody StavkaKalkulacije stavkaKalkulacije){
+        return ResponseEntity.ok(stavkaKalkulacijeService.izmeniStavkuKalkulacije(stavkaKalkulacije));
+    }
+
+    @DeleteMapping("/obrisi/{id}")
+    public ResponseEntity<?> obrisiStavkuKalkulacije(@PathVariable Long id){
+        return ResponseEntity.ok(stavkaKalkulacijeService.obrisiStavkuKalkulacije(id));
+    }
+
+
+
 }

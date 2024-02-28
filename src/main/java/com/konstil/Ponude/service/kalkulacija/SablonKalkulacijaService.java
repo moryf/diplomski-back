@@ -1,9 +1,16 @@
 package com.konstil.Ponude.service.kalkulacija;
 
+import com.konstil.Ponude.domain.kalkulacija.Kalkulacija;
 import com.konstil.Ponude.domain.kalkulacija.SablonKalkulacija;
+import com.konstil.Ponude.domain.kalkulacija.StavkaKalkulacije;
+import com.konstil.Ponude.domain.kalkulacija.enumeracije.NacinRacunanjaDuzineKomada;
+import com.konstil.Ponude.domain.kalkulacija.enumeracije.NacinRacunanjaKomada;
+import com.konstil.Ponude.domain.ponuda.JedinicaMere;
 import com.konstil.Ponude.repository.kalkulacija.KalkulacijaRepository;
 import com.konstil.Ponude.repository.kalkulacija.SablonKalkulacijaRepository;
+import com.konstil.Ponude.repository.kalkulacija.StavkaKalkulacijeRepository;
 import com.konstil.Ponude.service.OpstiService;
+import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,15 +25,83 @@ public class SablonKalkulacijaService extends OpstiService<SablonKalkulacija, Lo
     }
     @Autowired
     KalkulacijaRepository kalkulacijaRepository;
+    @Autowired
+    EntityManager entityManager;
+    @Autowired
+    StavkaKalkulacijeRepository stavkaKalkulacijeRepository;
 
     public SablonKalkulacija noviSablon(String naziv, Long idKalkulacije) {
         SablonKalkulacija sablonKalkulacija = new SablonKalkulacija();
         sablonKalkulacija.setNaziv(naziv);
-        sablonKalkulacija.setKalkulacija(kalkulacijaRepository.findById(idKalkulacije).get());
+        Kalkulacija kalkulacijaCopy = kalkulacijaRepository.findById(idKalkulacije).get();
+        entityManager.detach(kalkulacijaCopy);
+        kalkulacijaCopy.setId(null);
+    kalkulacijaCopy.setNaziv(kalkulacijaCopy.getNaziv() + "*SABLON*");
+        kalkulacijaRepository.save(kalkulacijaCopy);
+        sablonKalkulacija.setKalkulacija(kalkulacijaCopy);
+        kopirajStavkeKalkulacije(kalkulacijaRepository.findById(idKalkulacije).get(), kalkulacijaCopy);
+
+
         return repository.save(sablonKalkulacija);
     }
 
     public List<SablonKalkulacija> pronadjiPoNazivu(String naziv) {
         return ((SablonKalkulacijaRepository) repository).findByNazivContainingIgnoreCase(naziv);
+    }
+
+
+    public void kopirajStavkeKalkulacije(Kalkulacija sablon, Kalkulacija novaKalkulacije) {
+        stavkaKalkulacijeRepository.getAllByKalkulacijaId(sablon.getId()).forEach(stavkaKalkulacije -> {
+            entityManager.detach(stavkaKalkulacije);
+            stavkaKalkulacije.setId(null);
+            stavkaKalkulacije.setKalkulacija(novaKalkulacije);
+            System.out.println(stavkaKalkulacije.getKalkulacija().getId());
+            NacinRacunanjaKomada nacinRacunanjaKomada = stavkaKalkulacije.getNacinRacunanjaKomada();
+            NacinRacunanjaDuzineKomada nacinRacunanjaDuzineKomada = stavkaKalkulacije.getNacinRacunanjaDuzineKomada();
+
+            switch (nacinRacunanjaKomada){
+                case KOMAD:
+                    break;
+                case PO_DUZNOM_METRU:
+                    stavkaKalkulacije.setKolicinaKomada((int) ((stavkaKalkulacije.getKalkulacija().getProizvodPonuda().getDuzinaPoKomadu()/stavkaKalkulacije.getRazmak()+stavkaKalkulacije.getRucniDodatak())*stavkaKalkulacije.getMultiplikator()));
+                    break;
+                case PO_VISINSKOM_METRU:
+                    stavkaKalkulacije.setKolicinaKomada((int) ((stavkaKalkulacije.getKalkulacija().getProizvodPonuda().getVisinaPoKomadu()/stavkaKalkulacije.getRazmak()+stavkaKalkulacije.getRucniDodatak())*stavkaKalkulacije.getMultiplikator()));
+                    break;
+                case PO_DUBINSKOM_METRU:
+                    stavkaKalkulacije.setKolicinaKomada((int) ((stavkaKalkulacije.getKalkulacija().getProizvodPonuda().getDubinaPoKomadu()/stavkaKalkulacije.getRazmak()+stavkaKalkulacije.getRucniDodatak())*stavkaKalkulacije.getMultiplikator()));
+                    break;
+                default:
+                    break;
+            }
+
+            if (stavkaKalkulacije.getProizvod().getJedinicaMere()== JedinicaMere.KOMAD){
+                stavkaKalkulacije.setKolicina(stavkaKalkulacije.getKolicinaKomada());
+            }
+            else {
+                switch (nacinRacunanjaDuzineKomada){
+                    case UPISANO:
+                        stavkaKalkulacije.setReferentnaDuzina(stavkaKalkulacije.getDuzinaKomada());
+                        break;
+                    case VISINA:
+                        stavkaKalkulacije.setReferentnaDuzina(stavkaKalkulacije.getKalkulacija().getProizvodPonuda().getVisinaPoKomadu());
+                        break;
+                    case DUBINA:
+                        stavkaKalkulacije.setReferentnaDuzina(stavkaKalkulacije.getKalkulacija().getProizvodPonuda().getDubinaPoKomadu());
+                        break;
+                    case DUZINA:
+                        stavkaKalkulacije.setReferentnaDuzina(stavkaKalkulacije.getKalkulacija().getProizvodPonuda().getDuzinaPoKomadu());
+                        break;
+                    default:
+                        stavkaKalkulacije.setReferentnaDuzina(stavkaKalkulacije.getDuzinaKomada());
+                        break;
+                }
+                stavkaKalkulacije.setDuzinaKomada(stavkaKalkulacije.getReferentnaDuzina()+stavkaKalkulacije.getRazlikaDuzine());
+                stavkaKalkulacije.setKolicina(stavkaKalkulacije.getKolicinaKomada()*stavkaKalkulacije.getDuzinaKomada());
+            }
+
+
+            stavkaKalkulacijeRepository.save(stavkaKalkulacije);
+        });
     }
 }

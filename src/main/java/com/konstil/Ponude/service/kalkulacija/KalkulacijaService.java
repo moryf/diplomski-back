@@ -115,7 +115,7 @@ public class KalkulacijaService extends OpstiService<Kalkulacija,Long> {
 
     }
 
-    private void kopirajStavkeKalkulacije(Kalkulacija sablon, Kalkulacija novaKalkulacije) {
+    public void kopirajStavkeKalkulacije(Kalkulacija sablon, Kalkulacija novaKalkulacije) {
         stavkaKalkulacijeRepository.getAllByKalkulacijaId(sablon.getId()).forEach(stavkaKalkulacije -> {
             entityManager.detach(stavkaKalkulacije);
             stavkaKalkulacije.setId(null);
