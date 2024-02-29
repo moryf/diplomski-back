@@ -25,7 +25,7 @@ public class Kalkulacija {
     String naziv;
 
     @ManyToOne
-    @JoinColumn(name="proizvod_ponuda_id",nullable = false)
+    @JoinColumn(name="proizvod_ponuda_id")
     private ProizvodPonuda proizvodPonuda;
 
     Date datumOtvaranja = new Date();

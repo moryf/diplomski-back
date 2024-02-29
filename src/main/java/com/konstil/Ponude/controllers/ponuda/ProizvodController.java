@@ -24,4 +24,9 @@ public class ProizvodController {
         System.out.println("sifra: " + sifra + " naziv: " + naziv);
         return ResponseEntity.ok(proizvodService.pretraziProizvode(sifra, naziv));
     }
+
+    @PostMapping("/sacuvaj")
+    public ResponseEntity<?> sacuvajProizvod(@RequestBody Proizvod proizvod) {
+        return ResponseEntity.ok(proizvodService.novi(proizvod));
+    }
 }
