@@ -29,14 +29,14 @@ public class StavkaKalkulacije {
     private Proizvod proizvod;
 
     @Enumerated(EnumType.STRING)
-    NacinRacunanjaKomada nacinRacunanjaKomada;
+    NacinRacunanjaKomada nacinRacunanjaKomada = NacinRacunanjaKomada.KOMAD;
     float razmak;
     float multiplikator;
     int rucniDodatak;
     int kolicinaKomada;
 
     @Enumerated(EnumType.STRING)
-    NacinRacunanjaDuzineKomada nacinRacunanjaDuzineKomada;
+    NacinRacunanjaDuzineKomada nacinRacunanjaDuzineKomada= NacinRacunanjaDuzineKomada.UPISANO;
     float referentnaDuzina;
     float razlikaDuzine;
     float duzinaKomada;

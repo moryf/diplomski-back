@@ -122,7 +122,7 @@ public class KalkulacijaService extends OpstiService<Kalkulacija,Long> {
             stavkaKalkulacije.setKalkulacija(novaKalkulacije);
             System.out.println(stavkaKalkulacije.getKalkulacija().getId());
             NacinRacunanjaKomada nacinRacunanjaKomada = stavkaKalkulacije.getNacinRacunanjaKomada();
-            NacinRacunanjaDuzineKomada nacinRacunanjaDuzineKomada = stavkaKalkulacije.getNacinRacunanjaDuzineKomada();
+
 
                 switch (nacinRacunanjaKomada){
                     case KOMAD:
@@ -144,24 +144,28 @@ public class KalkulacijaService extends OpstiService<Kalkulacija,Long> {
                     stavkaKalkulacije.setKolicina(stavkaKalkulacije.getKolicinaKomada());
                 }
                 else {
+                    NacinRacunanjaDuzineKomada nacinRacunanjaDuzineKomada = stavkaKalkulacije.getNacinRacunanjaDuzineKomada();
                     switch (nacinRacunanjaDuzineKomada){
                         case UPISANO:
-                            stavkaKalkulacije.setReferentnaDuzina(stavkaKalkulacije.getDuzinaKomada());
+                                                        ;
                             break;
                         case VISINA:
                             stavkaKalkulacije.setReferentnaDuzina(stavkaKalkulacije.getKalkulacija().getProizvodPonuda().getVisinaPoKomadu());
+                            stavkaKalkulacije.setDuzinaKomada(stavkaKalkulacije.getReferentnaDuzina()+stavkaKalkulacije.getRazlikaDuzine());
                             break;
                         case DUBINA:
                             stavkaKalkulacije.setReferentnaDuzina(stavkaKalkulacije.getKalkulacija().getProizvodPonuda().getDubinaPoKomadu());
+                            stavkaKalkulacije.setDuzinaKomada(stavkaKalkulacije.getReferentnaDuzina()+stavkaKalkulacije.getRazlikaDuzine());
                             break;
                         case DUZINA:
                             stavkaKalkulacije.setReferentnaDuzina(stavkaKalkulacije.getKalkulacija().getProizvodPonuda().getDuzinaPoKomadu());
+                            stavkaKalkulacije.setDuzinaKomada(stavkaKalkulacije.getReferentnaDuzina()+stavkaKalkulacije.getRazlikaDuzine());
                             break;
                         default:
-                            stavkaKalkulacije.setReferentnaDuzina(stavkaKalkulacije.getDuzinaKomada());
+
                             break;
                     }
-                    stavkaKalkulacije.setDuzinaKomada(stavkaKalkulacije.getReferentnaDuzina()+stavkaKalkulacije.getRazlikaDuzine());
+
                     stavkaKalkulacije.setKolicina(stavkaKalkulacije.getKolicinaKomada()*stavkaKalkulacije.getDuzinaKomada());
                 }
 
