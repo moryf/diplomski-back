@@ -19,10 +19,9 @@ public class ProizvodController {
 
 
 
-    @GetMapping("/pretrazi/sifra={sifra}/naziv={naziv}")
-    public ResponseEntity<?> pretraziProizvode(@PathVariable String sifra,@PathVariable String naziv) {
-        System.out.println("sifra: " + sifra + " naziv: " + naziv);
-        return ResponseEntity.ok(proizvodService.pretraziProizvode(sifra, naziv));
+    @GetMapping("/pretrazi/sifra={sifra}/naziv={naziv}/opis={opis}")
+    public ResponseEntity<?> pretraziProizvode(@PathVariable String sifra,@PathVariable String naziv, @PathVariable String opis) {
+        return ResponseEntity.ok(proizvodService.pretraziProizvode(sifra, naziv, opis));
     }
 
     @PostMapping("/sacuvaj")

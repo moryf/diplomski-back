@@ -23,8 +23,9 @@ public class ProizvodService extends OpstiService<Proizvod,String> {
     @Autowired
     PodrazumevaneVrednostiRepository podrazumevaneVrednostiRepository;
 
-    public List<Proizvod> pretraziProizvode(String sifra, String naziv) {
-        return ((ProizvodRepository) repository).findAllBySifraContainingAndNazivContainsIgnoreCase(sifra, naziv);
+    public List<Proizvod> pretraziProizvode(String sifra, String naziv, String opis) {
+        System.out.println("sifra: "+sifra+" naziv: "+naziv+" opis: "+opis);
+        return ((ProizvodRepository) repository).findAllBySifraContainingAndNazivContainsIgnoreCaseAndOpisContainingIgnoreCase(sifra, naziv, opis);
     }
 
     public Proizvod novi(Proizvod proizvod) {
