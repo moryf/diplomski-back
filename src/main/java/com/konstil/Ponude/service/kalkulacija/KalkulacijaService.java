@@ -173,4 +173,28 @@ public class KalkulacijaService extends OpstiService<Kalkulacija,Long> {
             stavkaKalkulacijeRepository.save(stavkaKalkulacije);
         });
     }
+
+    public Kalkulacija kopirajKalkulaciju(Long idKalkulacije) {
+        Kalkulacija kalkulacija = findById(idKalkulacije);
+        Kalkulacija novaKalkulacije = new Kalkulacija();
+        novaKalkulacije.setKreirao(kalkulacija.getKreirao());
+        novaKalkulacije.setCinkovanje(kalkulacija.isCinkovanje());
+        novaKalkulacije.setFarbanje(kalkulacija.isFarbanje());
+        novaKalkulacije.setMontaza(kalkulacija.isMontaza());
+        novaKalkulacije.setIzrada(kalkulacija.isIzrada());
+        novaKalkulacije.setMaterijalPoKg(kalkulacija.getMaterijalPoKg());
+        novaKalkulacije.setCinkovanjePoKg(kalkulacija.getCinkovanjePoKg());
+        novaKalkulacije.setFarbanjePoM2(kalkulacija.getFarbanjePoM2());
+        novaKalkulacije.setMontazaPoKg(kalkulacija.getMontazaPoKg());
+        novaKalkulacije.setIzradaPoKg(kalkulacija.getIzradaPoKg());
+        novaKalkulacije.setRezijskiTroskoviStepen(kalkulacija.getRezijskiTroskoviStepen());
+        novaKalkulacije.setStepenSigurnosti(kalkulacija.getStepenSigurnosti());
+        novaKalkulacije.setProizvodPonuda(kalkulacija.getProizvodPonuda());
+        novaKalkulacije.setNaziv(kalkulacija.getNaziv()+" kopija "+new Date().toLocaleString());
+        novaKalkulacije= save(novaKalkulacije);
+
+        kopirajStavkeKalkulacije(kalkulacija, novaKalkulacije);
+
+        return save(novaKalkulacije);
+    }
 }

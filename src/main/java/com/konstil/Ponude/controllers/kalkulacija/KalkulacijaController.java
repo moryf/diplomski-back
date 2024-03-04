@@ -40,4 +40,9 @@ public class KalkulacijaController {
         return ResponseEntity.ok(kalkulacijaService.novakalkulacijaIzSablona(idSablona, idProizvodaPonude));
     }
 
+    @GetMapping("kopiraj/{idKalkulacije}")
+    public ResponseEntity<?> kopirajKalkulaciju(@PathVariable Long idKalkulacije) {
+        return ResponseEntity.ok(kalkulacijaService.kopirajKalkulaciju(idKalkulacije));
+    }
+
 }
