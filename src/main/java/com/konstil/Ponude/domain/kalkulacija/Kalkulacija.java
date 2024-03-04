@@ -62,4 +62,7 @@ public class Kalkulacija {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private KoriscenjeCene koriscenjeCene = KoriscenjeCene.VELEPRODAJNA_CENA;
+
+    float ukupnoBezPdv;
+    float ukupnoSaPdv;
 }

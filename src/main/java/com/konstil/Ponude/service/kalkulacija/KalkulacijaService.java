@@ -197,4 +197,8 @@ public class KalkulacijaService extends OpstiService<Kalkulacija,Long> {
 
         return save(novaKalkulacije);
     }
+
+    public List<Kalkulacija> getByPonudaId(Long idPonude) {
+        return ((KalkulacijaRepository) repository).findByProizvodPonudaPonudaId(idPonude);
+    }
 }

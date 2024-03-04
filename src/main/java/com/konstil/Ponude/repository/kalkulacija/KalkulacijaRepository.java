@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface KalkulacijaRepository extends JpaRepository<Kalkulacija, Long> {
     List<Kalkulacija> findByProizvodPonudaId(Long id);
+
+    List<Kalkulacija> findByProizvodPonudaPonudaId(Long idPonude);
 }
