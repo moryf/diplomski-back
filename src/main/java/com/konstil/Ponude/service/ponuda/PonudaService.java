@@ -34,7 +34,7 @@ public class PonudaService extends OpstiService<Ponuda,Long> {
         }
         catch (Exception e){
             e.printStackTrace();
-            throw ServerException.create("Greska prilikom cuvanja ponude");
+            throw ServerException.create("Greska prilikom cuvanja ponude, proverite da li kupac vec postoji u bazi.");
         }
     }
 
