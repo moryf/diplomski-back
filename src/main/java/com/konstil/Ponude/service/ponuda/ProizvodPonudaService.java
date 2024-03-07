@@ -1,6 +1,7 @@
 package com.konstil.Ponude.service.ponuda;
 
 import com.konstil.Ponude.domain.ponuda.ProizvodPonuda;
+import com.konstil.Ponude.exception.ServerException;
 import com.konstil.Ponude.repository.ponuda.PonudaRepository;
 import com.konstil.Ponude.repository.ponuda.ProizvodPonudaRepository;
 import com.konstil.Ponude.service.OpstiService;
@@ -19,11 +20,19 @@ public class ProizvodPonudaService extends OpstiService<ProizvodPonuda,Long> {
     PonudaRepository ponudaRepository;
 
     public List<ProizvodPonuda> getProizvodiPonudaByPonudaId(Long id) {
-        return ((ProizvodPonudaRepository)repository).getProizvodPonudasByPonudaId(id);
+        try {
+            return ((ProizvodPonudaRepository)repository).getProizvodPonudasByPonudaId(id);
+        } catch (Exception e) {
+            throw new ServerException("Greska prilikom dohvatanja proizvoda ponude:"+e.getMessage());
+        }
     }
 
     public ProizvodPonuda dodajProizvodPonuda(Long id, ProizvodPonuda proizvodPonuda) {
-        proizvodPonuda.setPonuda(ponudaRepository.findById(id).get());
-        return repository.save(proizvodPonuda);
+        try {
+            proizvodPonuda.setPonuda(ponudaRepository.findById(id).get());
+            return repository.save(proizvodPonuda);
+        } catch (Exception e) {
+            throw new ServerException("Greska prilikom dodavanja proizvoda ponude:"+e.getMessage());
+        }
     }
 }

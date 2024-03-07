@@ -1,6 +1,7 @@
 package com.konstil.Ponude.service.util;
 
 import com.konstil.Ponude.domain.util.PodrazumevaneVrednosti;
+import com.konstil.Ponude.exception.ServerException;
 import com.konstil.Ponude.repository.util.PodrazumevaneVrednostiRepository;
 import com.konstil.Ponude.service.OpstiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,12 @@ public class PodrazumevaneVrednostiService extends OpstiService<PodrazumevaneVre
     }
 
     public PodrazumevaneVrednosti update(String oznaka, float vrednost) {
-        PodrazumevaneVrednosti podrazumevaneVrednosti = findById(oznaka);
-        podrazumevaneVrednosti.setVrednost(vrednost);
-        return save(podrazumevaneVrednosti);
+        try {
+            PodrazumevaneVrednosti podrazumevaneVrednosti = findById(oznaka);
+            podrazumevaneVrednosti.setVrednost(vrednost);
+            return save(podrazumevaneVrednosti);
+        } catch (Exception e) {
+            throw new ServerException("Greska prilikom azuriranja podrazumevane vrednosti:" + e.getMessage());
+        }
     }
 }

@@ -15,13 +15,21 @@ public class SablonKalkulacijaController {
 
     @PostMapping("/sacuvaj/{idKalkulacije}/naziv={naziv}")
     public ResponseEntity<?> noviSablon(@PathVariable String naziv, @PathVariable Long idKalkulacije) {
-        System.out.println("naziv: " + naziv + " idKalkulacije: " + idKalkulacije);
-        return ResponseEntity.ok(sablonKalkulacijaService.noviSablon(naziv, idKalkulacije));
+        try {
+            return ResponseEntity.ok(sablonKalkulacijaService.noviSablon(naziv, idKalkulacije));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
     }
 
 
     @GetMapping("/naziv={naziv}")
     public ResponseEntity<?> pronadjiPoNazivu(@PathVariable String naziv) {
-        return ResponseEntity.ok(sablonKalkulacijaService.pronadjiPoNazivu(naziv));
+        try {
+            return ResponseEntity.ok(sablonKalkulacijaService.pronadjiPoNazivu(naziv));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

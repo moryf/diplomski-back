@@ -1,6 +1,7 @@
 package com.konstil.Ponude.service.korisnik;
 
 import com.konstil.Ponude.domain.korisnik.Korisnik;
+import com.konstil.Ponude.exception.ServerException;
 import com.konstil.Ponude.repository.korisnik.KorisnikRepository;
 import com.konstil.Ponude.service.OpstiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,15 +30,23 @@ public class KorisnikService extends OpstiService<Korisnik,Long> {
     }
 
     public Korisnik register(Korisnik korisnik) {
-        korisnik.setLozinka(passwordEncoder.encode(korisnik.getLozinka()));
-        return save(korisnik);
+        try {
+            korisnik.setLozinka(passwordEncoder.encode(korisnik.getLozinka()));
+            return save(korisnik);
+        } catch (Exception e) {
+            throw  new ServerException("Greska prilikom registracije korisnika"+e.getMessage());
+        }
     }
 
     public Korisnik izmeni(String id, String ime, String prezime, String korisnickoIme) {
-        Korisnik korisnik = findById(Long.parseLong(id));
-        korisnik.setIme(ime);
-        korisnik.setPrezime(prezime);
-        korisnik.setKorisnickoIme(korisnickoIme);
-        return save(korisnik);
+        try {
+            Korisnik korisnik = findById(Long.parseLong(id));
+            korisnik.setIme(ime);
+            korisnik.setPrezime(prezime);
+            korisnik.setKorisnickoIme(korisnickoIme);
+            return save(korisnik);
+        } catch (NumberFormatException e) {
+            throw new ServerException("Greska prilikom izmene korisnika"+e.getMessage());
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.konstil.Ponude.service.ponuda;
 
 import com.konstil.Ponude.domain.ponuda.DokumentiPonudeLinkovi;
+import com.konstil.Ponude.exception.ServerException;
 import com.konstil.Ponude.repository.ponuda.DokumentiPonudeLinkoviRepository;
 import com.konstil.Ponude.repository.ponuda.PonudaRepository;
 import com.konstil.Ponude.service.OpstiService;
@@ -20,11 +21,19 @@ public class DokumentiPonudeLinkoviService extends OpstiService<DokumentiPonudeL
     PonudaRepository ponudaRepository;
 
     public List<DokumentiPonudeLinkovi> getByPonudaId(Long idPonude) {
-        return ((DokumentiPonudeLinkoviRepository)repository).getByPonudaId(idPonude);
+        try {
+            return ((DokumentiPonudeLinkoviRepository)repository).getByPonudaId(idPonude);
+        } catch (Exception e) {
+            throw new ServerException("Greska prilikom dohvatanja dokumenata ponude linkova:"+e.getMessage());
+        }
     }
 
     public DokumentiPonudeLinkovi noviDokument(Long idPonude, DokumentiPonudeLinkovi dokumentiPonudeLinkovi) {
-        dokumentiPonudeLinkovi.setPonuda(ponudaRepository.findById(idPonude).get());
-        return repository.save(dokumentiPonudeLinkovi);
+        try {
+            dokumentiPonudeLinkovi.setPonuda(ponudaRepository.findById(idPonude).get());
+            return repository.save(dokumentiPonudeLinkovi);
+        } catch (Exception e) {
+            throw new ServerException("Greska prilikom kreiranja novog dokumenta ponude linka:"+e.getMessage());
+        }
     }
 }

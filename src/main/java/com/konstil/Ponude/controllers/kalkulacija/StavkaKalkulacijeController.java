@@ -19,27 +19,47 @@ public class StavkaKalkulacijeController {
 
     @GetMapping("/kalkulacija/{id}")
     public ResponseEntity<?> getStavkeKalkulacijeByKalkulacijaId(@PathVariable Long id){
-        return ResponseEntity.ok(stavkaKalkulacijeService.getStavkeKalkulacijeByKalkulacijaId(id));
+        try {
+            return ResponseEntity.ok(stavkaKalkulacijeService.getStavkeKalkulacijeByKalkulacijaId(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PostMapping("/dodaj/kalkulacija/{id}")
     public ResponseEntity<?> dodajStavkuKalkulacije(@PathVariable Long id, @RequestBody StavkaKalkulacije stavkaKalkulacije){
-        return ResponseEntity.ok(stavkaKalkulacijeService.dodajStavkuKalkulacije(id, stavkaKalkulacije));
+        try {
+            return ResponseEntity.ok(stavkaKalkulacijeService.dodajStavkuKalkulacije(id, stavkaKalkulacije));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PutMapping("/izmeni/lista")
     public ResponseEntity<?> izmeniStavkeKalkulacije(@RequestBody List<StavkaKalkulacije> stavkeKalkulacije){
-        return ResponseEntity.ok(stavkaKalkulacijeService.izmeniStavkeKalkulacije(stavkeKalkulacije));
+        try {
+            return ResponseEntity.ok(stavkaKalkulacijeService.izmeniStavkeKalkulacije(stavkeKalkulacije));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PutMapping("/izmeni")
     public ResponseEntity<?> izmeniStavkuKalkulacije(@RequestBody StavkaKalkulacije stavkaKalkulacije){
-        return ResponseEntity.ok(stavkaKalkulacijeService.izmeniStavkuKalkulacije(stavkaKalkulacije));
+        try {
+            return ResponseEntity.ok(stavkaKalkulacijeService.izmeniStavkuKalkulacije(stavkaKalkulacije));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @DeleteMapping("/obrisi/{id}")
     public ResponseEntity<?> obrisiStavkuKalkulacije(@PathVariable Long id){
-        return ResponseEntity.ok(stavkaKalkulacijeService.obrisiStavkuKalkulacije(id));
+        try {
+            return ResponseEntity.ok(stavkaKalkulacijeService.obrisiStavkuKalkulacije(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
 

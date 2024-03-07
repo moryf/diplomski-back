@@ -17,6 +17,10 @@ public class ProizvodController {
     ProizvodService proizvodService;
 
 
+    @GetMapping("/svi")
+    public ResponseEntity<?> sviProizvodi() {
+        return ResponseEntity.ok(proizvodService.findAll());
+    }
 
 
     @GetMapping("/pretrazi/sifra={sifra}/naziv={naziv}/opis={opis}")
