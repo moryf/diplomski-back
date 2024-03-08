@@ -1,6 +1,7 @@
 package com.konstil.Ponude.controllers.korisnik;
 
 import com.konstil.Ponude.domain.korisnik.Korisnik;
+import com.konstil.Ponude.dto.IzmenaSifreRequest;
 import com.konstil.Ponude.dto.LoginRequest;
 import com.konstil.Ponude.service.korisnik.KorisnikService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,15 @@ public class KorisnikController {
     public ResponseEntity<?> izmeni(@PathVariable String id, @PathVariable String ime, @PathVariable String prezime, @PathVariable String korisnickoIme) {
         try {
             return ResponseEntity.ok(korisnikService.izmeni(id, ime, prezime, korisnickoIme));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/promeni-sifru/{id}")
+    public ResponseEntity<?> promeniSifru(@PathVariable String id, @RequestBody IzmenaSifreRequest izmenaSifreRequest) {
+        try {
+            return ResponseEntity.ok(korisnikService.promeniSifru(id, izmenaSifreRequest.getStaraSifra(), izmenaSifreRequest.getNovaSifra()));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

@@ -19,17 +19,38 @@ public class ProizvodController {
 
     @GetMapping("/svi")
     public ResponseEntity<?> sviProizvodi() {
-        return ResponseEntity.ok(proizvodService.findAll());
+        try {
+            return ResponseEntity.ok(proizvodService.findAll());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
 
     @GetMapping("/pretrazi/sifra={sifra}/naziv={naziv}/opis={opis}")
     public ResponseEntity<?> pretraziProizvode(@PathVariable String sifra,@PathVariable String naziv, @PathVariable String opis) {
-        return ResponseEntity.ok(proizvodService.pretraziProizvode(sifra, naziv, opis));
+        try {
+            return ResponseEntity.ok(proizvodService.pretraziProizvode(sifra, naziv, opis));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PostMapping("/sacuvaj")
     public ResponseEntity<?> sacuvajProizvod(@RequestBody Proizvod proizvod) {
-        return ResponseEntity.ok(proizvodService.novi(proizvod));
+        try {
+            return ResponseEntity.ok(proizvodService.novi(proizvod));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/izmeni")
+    public ResponseEntity<?> izmeniProizvod(@RequestBody Proizvod proizvod) {
+        try {
+            return ResponseEntity.ok(proizvodService.update(proizvod));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

@@ -49,4 +49,17 @@ public class KorisnikService extends OpstiService<Korisnik,Long> {
             throw new ServerException("Greska prilikom izmene korisnika"+e.getMessage());
         }
     }
+
+    public Korisnik promeniSifru(String id, String staraSifra, String novaSifra) {
+        try {
+            Korisnik korisnik = findById(Long.parseLong(id));
+            if (passwordEncoder.matches(staraSifra, korisnik.getLozinka())) {
+                korisnik.setLozinka(passwordEncoder.encode(novaSifra));
+                return save(korisnik);
+            }
+            throw new ServerException("Pogresna stara sifra");
+        } catch (NumberFormatException e) {
+            throw new ServerException("Greska prilikom promene sifre"+e.getMessage());
+        }
+    }
 }

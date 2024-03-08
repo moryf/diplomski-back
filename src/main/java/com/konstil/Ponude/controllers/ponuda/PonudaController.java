@@ -26,28 +26,48 @@ public class PonudaController {
 
     @GetMapping("/sve")
     public ResponseEntity<?> svePonude() {
-        return ResponseEntity.ok(ponudaService.findAll());
+        try {
+            return ResponseEntity.ok(ponudaService.findAll());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @GetMapping("/nezavrsene")
     public ResponseEntity<?> novePonude() {
-        return ResponseEntity.ok(ponudaService.findNezavrsene());
+        try {
+            return ResponseEntity.ok(ponudaService.findNezavrsene());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @GetMapping("/prihvacene")
     public ResponseEntity<?> prihvacenePonude() {
-        return ResponseEntity.ok(ponudaService.findByStatus(PonudaStatus.PRIHVACENA));
+        try {
+            return ResponseEntity.ok(ponudaService.findByStatus(PonudaStatus.PRIHVACENA));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @GetMapping("/odbijene")
     public ResponseEntity<?> odbijenePonude() {
-        return ResponseEntity.ok(ponudaService.findByStatus(PonudaStatus.ODBIJENA));
+        try {
+            return ResponseEntity.ok(ponudaService.findByStatus(PonudaStatus.ODBIJENA));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
 
     @GetMapping("/{id}")
     public ResponseEntity<?> ponuda(@PathVariable Long id) {
-        return ResponseEntity.ok(ponudaService.findById(id));
+        try {
+            return ResponseEntity.ok(ponudaService.findById(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PutMapping("/prihvati/{id}")
@@ -71,7 +91,11 @@ public class PonudaController {
 
     @GetMapping("/dashboard")
     public ResponseEntity<?> dashboard() {
-        return ResponseEntity.ok(ponudaService.dashboard());
+        try {
+            return ResponseEntity.ok(ponudaService.dashboard());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
 

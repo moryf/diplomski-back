@@ -17,6 +17,10 @@ public class TipProizvodaPonudaController {
 
     @GetMapping("/svi")
     public ResponseEntity<?> getTipProizvodaPonuda() {
-        return ResponseEntity.ok(tipProizvodaPonudaService.findAll());
+        try {
+            return ResponseEntity.ok(tipProizvodaPonudaService.findAll());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

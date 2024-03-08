@@ -15,16 +15,28 @@ public class ProizvodPonudaController {
 
     @GetMapping("/ponuda/{id}")
     public ResponseEntity<?> getProizvodiPonudaByPonudaId(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(proizvodPonudaService.getProizvodiPonudaByPonudaId(id));
+        try {
+            return ResponseEntity.ok(proizvodPonudaService.getProizvodiPonudaByPonudaId(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PostMapping("/ponuda/{id}/dodaj")
     public ResponseEntity<?> dodajProizvodPonuda(@PathVariable("id") Long id, @RequestBody ProizvodPonuda proizvodPonuda) {
-        return ResponseEntity.ok(proizvodPonudaService.dodajProizvodPonuda(id, proizvodPonuda));
+        try {
+            return ResponseEntity.ok(proizvodPonudaService.dodajProizvodPonuda(id, proizvodPonuda));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getProizvodPonudaById(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(proizvodPonudaService.findById(id));
+        try {
+            return ResponseEntity.ok(proizvodPonudaService.findById(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

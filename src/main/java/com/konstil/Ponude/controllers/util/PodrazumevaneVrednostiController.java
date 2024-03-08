@@ -14,7 +14,11 @@ public class PodrazumevaneVrednostiController {
 
     @GetMapping("/sve")
     public ResponseEntity<?> vratiSve() {
-        return ResponseEntity.ok(podrazumevaneVrednostiService.findAll());
+        try {
+            return ResponseEntity.ok(podrazumevaneVrednostiService.findAll());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PutMapping("/izmeni/oznaka={oznaka}/vrednost={vrednost}")

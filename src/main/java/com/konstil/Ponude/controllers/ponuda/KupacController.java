@@ -15,12 +15,20 @@ public class KupacController {
 
     @PostMapping("/dodaj")
     public ResponseEntity<?> dodajKupca(@RequestBody Kupac kupac) {
-        return ResponseEntity.ok(kupacService.save(kupac));
+        try {
+            return ResponseEntity.ok(kupacService.save(kupac));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @GetMapping("/pretrazi/imeIPrezime={imeIPrezime}&brojTelefona={brojTelefona}")
     public ResponseEntity<?> pretraziKupce(@PathVariable String imeIPrezime, @PathVariable String brojTelefona) {
-        return ResponseEntity.ok(kupacService.pretraziKupce(imeIPrezime, brojTelefona));
+        try {
+            return ResponseEntity.ok(kupacService.pretraziKupce(imeIPrezime, brojTelefona));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
 

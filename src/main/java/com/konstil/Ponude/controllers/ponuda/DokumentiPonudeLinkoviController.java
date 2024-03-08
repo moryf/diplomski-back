@@ -15,11 +15,19 @@ public class DokumentiPonudeLinkoviController {
 
     @GetMapping("/ponuda/{idPonude}")
     public ResponseEntity<?> getByPonudaId(@PathVariable Long idPonude) {
-        return ResponseEntity.ok(dokumentiPonudeLinkoviService.getByPonudaId(idPonude));
+        try {
+            return ResponseEntity.ok(dokumentiPonudeLinkoviService.getByPonudaId(idPonude));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PostMapping("/ponuda/{idPonude}")
     public ResponseEntity<?> save(@PathVariable Long idPonude, @RequestBody DokumentiPonudeLinkovi dokumentiPonudeLinkovi) {
-        return ResponseEntity.ok(dokumentiPonudeLinkoviService.noviDokument(idPonude, dokumentiPonudeLinkovi));
+        try {
+            return ResponseEntity.ok(dokumentiPonudeLinkoviService.noviDokument(idPonude, dokumentiPonudeLinkovi));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }
