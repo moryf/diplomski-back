@@ -11,6 +11,7 @@ import java.util.List;
 @Service
 public class OpstiService <T, ID> {
     protected JpaRepository<T, ID> repository;
+
     public T save(T t) {
         try {
             return repository.save(t);

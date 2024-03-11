@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
+
 public class KalkulacijaService extends OpstiService<Kalkulacija,Long> {
     @Autowired
     public KalkulacijaService(KalkulacijaRepository kalkulacijaRepository) {
