@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.konstil</groupId>
 	<artifactId>Ponude</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>Ponude</name>
 	<description>Pravljenje ponuda za metalne konstukcije i kovano gvozdje</description>
 	<properties>

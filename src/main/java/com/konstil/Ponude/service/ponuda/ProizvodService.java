@@ -35,19 +35,20 @@ public class ProizvodService extends OpstiService<Proizvod,String> {
 
     public Proizvod novi(Proizvod proizvod) {
         try {
-            String sifra = "11";
+            String sifra = "220";
             if(proizvod.getJedinicaMere()== JedinicaMere.KOMAD){
                 sifra=sifra+"00";
             }else {
                 sifra=sifra+"01";
             }
+            System.out.println("sifra: "+sifra);
+            String maxSifra = ((ProizvodRepository) repository).getMaxSifra(sifra);
+            System.out.println("maxSifra: "+maxSifra);
 
-            List<String> maxSifra = ((ProizvodRepository) repository).getMaxSifra(sifra);
-
-            if(!maxSifra.isEmpty()){
-                 sifra = String.valueOf(parseInt(maxSifra.get(0))+1);
+            if(maxSifra!=null && !maxSifra.isEmpty()){
+                 sifra = String.valueOf(parseInt(maxSifra)+1);
             }else {
-                sifra = sifra + "0001";
+                sifra = sifra + "1";
             }
 
             proizvod.setSifra(sifra);
