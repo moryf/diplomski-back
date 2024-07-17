@@ -87,4 +87,12 @@ public class PonudaService extends OpstiService<Ponuda,Long> {
             throw new ServerException("Greska prilikom dohvatanja dashboarda:" + e.getMessage());
         }
     }
+
+    public List<Ponuda> findByKupac(Long id) {
+        try {
+            return ((PonudaRepository) repository).findByKupacId(id);
+        } catch (Exception e) {
+            throw new ServerException("Greska prilikom dohvatanja ponuda po kupcu:" + e.getMessage());
+        }
+    }
 }

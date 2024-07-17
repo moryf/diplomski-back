@@ -12,6 +12,24 @@ public class SablonKalkulacijaController {
     @Autowired
     SablonKalkulacijaService sablonKalkulacijaService;
 
+    @GetMapping("/svi")
+    public ResponseEntity<?> sviSabloni() {
+        try {
+            return ResponseEntity.ok(sablonKalkulacijaService.findAll());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(sablonKalkulacijaService.findById(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 
     @PostMapping("/sacuvaj/{idKalkulacije}/naziv={naziv}")
     public ResponseEntity<?> noviSablon(@PathVariable String naziv, @PathVariable Long idKalkulacije) {

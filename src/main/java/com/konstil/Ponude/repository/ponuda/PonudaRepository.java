@@ -29,4 +29,6 @@ public interface PonudaRepository extends JpaRepository<Ponuda, Long> {
             nativeQuery = true
     )
     int novihPonudaOveNedelje();
+
+    List<Ponuda> findByKupacId(Long id);
 }

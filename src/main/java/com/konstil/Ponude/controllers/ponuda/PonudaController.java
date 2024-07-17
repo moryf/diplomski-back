@@ -98,6 +98,14 @@ public class PonudaController {
         }
     }
 
+    @GetMapping("/kupac/{id}")
+    public ResponseEntity<?> ponudeKupca(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(ponudaService.findByKupac(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 
 
 }

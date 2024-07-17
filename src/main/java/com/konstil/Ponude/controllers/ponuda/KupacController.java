@@ -31,5 +31,23 @@ public class KupacController {
         }
     }
 
+    @GetMapping("/svi")
+    public ResponseEntity<?> sviKupci() {
+        try {
+            return ResponseEntity.ok(kupacService.findAll());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> kupac(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(kupacService.findById(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 
 }
